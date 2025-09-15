@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../BACKEND/CODE/catboost_info/learn"
+		},
+		{
+			"path": "../../BACKEND/CODE"
+		}
+	],
+	"settings": {}
+}

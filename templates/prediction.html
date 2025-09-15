@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Meta tags -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>CAN Intrusion</title>
+   <!-- Google Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+   <!-- Custom CSS -->
+   <style>
+         body {
+            font-family: 'Roboto', sans-serif;
+            background: url('static/images/I2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #49a8d1;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+         }
+         
+      .sidebar {
+         position: fixed;
+         top: 0;
+         left: 0;
+         height: 100%;
+         width: 200px;
+         background-color: #004d40;
+         padding-top: 2rem;
+         display: flex;
+         flex-direction: column;
+         align-items: start;
+         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+         z-index: 1000;
+      }
+
+      .sidebar a {
+         text-decoration: none;
+         color: #fff;
+         padding: 10px 20px;
+         font-size: 1rem;
+         display: block;
+         width: 100%;
+      }
+
+      .sidebar a:hover, .sidebar a.active {
+         background-color: #00796b;
+         color: #e0f7fa;
+         font-weight: bold;
+      }
+
+      .content {
+         margin-left: 220px;
+         padding: 2rem;
+      }
+
+      .banner {
+         background-color: #004d40;
+         color: #fff;
+         text-align: center;
+         padding: 2rem 1rem;
+         margin-bottom: 2rem;
+      }
+
+      .banner h1 {
+         font-size: 2.5rem;
+         font-weight: bold;
+      }
+
+      .form-container {
+         background: #ffffff;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+         border-radius: 8px;
+         padding: 2rem;
+         max-width: 1200px;
+         margin: 0 auto;
+      }
+
+      .form-container h2 {
+         text-align: center;
+         margin-bottom: 1.5rem;
+         color: #00796b;
+      }
+
+      .form-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+         gap: 1rem;
+      }
+
+      .form-group label {
+         font-weight: 500;
+         color: #555;
+      }
+
+      .form-group input {
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         padding: 10px;
+         width: 100%;
+      }
+
+      .form-group input:focus {
+         border-color: #00796b;
+         box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+      }
+
+      .btn-submit {
+         display: block;
+         width: 100%;
+         background-color: #00796b;
+         color: #fff;
+         border: none;
+         padding: 12px;
+         font-size: 1rem;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+      }
+
+      .btn-submit:hover {
+         background-color: #004d40;
+      }
+
+      .message-box {
+         text-align: center;
+         margin-top: 1rem;
+         font-size: 1.25rem;
+         color: #00796b;
+         font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+         .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+         }
+         .content {
+            margin-left: 0;
+         }
+      }
+   </style>
+</head>
+<body>
+   <!-- Sidebar -->
+   <div class="sidebar">
+      <a href="load">Upload Data</a>
+      <a href="view">View Data</a>
+      <a href="preprocessing">Preprocessing</a>
+      <a href="model">Model Training</a>
+      <a class="active" href="prediction">Prediction</a>
+      <a href="/">Logout</a>
+   </div>
+
+   <!-- Content -->
+   <div class="content">
+      <!-- Banner -->
+      <div class="banner">
+         <h1>Prediction Dashboard</h1>
+      </div>
+
+      <!-- Form -->
+      <div class="form-container">
+         <h2>Enter CAN Intrusion Data</h2>
+
+         <!-- Display the message dynamically -->
+         {% if msg %}
+         <div class="message-box">
+            {{ msg }}
+         </div>
+         {% endif %}
+
+         <form action="{{ url_for('prediction') }}" method="post">
+            <div class="form-grid">
+               <div class="form-group">
+                  <label for="f1">Message_ID</label>
+                  <input type="number" name="f1" id="f1" placeholder="Message_ID" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f2">Byte_1</label>
+                  <input type="number" name="f2" id="f2" placeholder="Byte_1" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f3">Byte_2</label>
+                  <input type="number" name="f3" id="f3" placeholder="Byte_2" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f4">Byte_4</label>
+                  <input type="number" name="f4" id="f4" placeholder="Byte_4" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f5">Byte_5</label>
+                  <input type="number" name="f5" id="f5" placeholder="Byte_5" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f6">Byte_6</label>
+                  <input type="number" name="f6" id="f6" placeholder="Byte_6" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f7">Byte_7</label>
+                  <input type="number" name="f7" id="f7" placeholder="Byte_7" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f8">Byte_8</label>
+                  <input type="number" name="f8" id="f8" placeholder="Byte_8" step="any">
+               </div>
+               <div class="form-group">
+                  <label for="f9">Signal_2</label>
+                  <input type="number" name="f9" id="f9" placeholder="Signal_2" step="any">
+               </div>
+            </div>
+            <button type="submit" class="btn-submit mt-4">Submit</button>
+         </form>
+      </div>
+   </div>
+</body>
+</html>
